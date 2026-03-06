@@ -113,7 +113,7 @@ card.addEventListener("click",()=>{
 const id = card.dataset.id
 const data = letters[id]
 
-text.innerText = data.text
+title.textContent = data.title
 text.textContent = data.text
 img.src = data.img
 
