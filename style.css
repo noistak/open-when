@@ -4,52 +4,55 @@ padding:0;
 box-sizing:border-box;
 }
 
-body{
+body {
 font-family:"Unbounded",sans-serif;
 background:#111;
 color:white;
 min-height:100vh;
 display:flex;
 justify-content:center;
-align-items:flex-start;
+align-items:center;
+overflow:hidden;
 
 padding-top:env(safe-area-inset-top);
 padding-bottom:env(safe-area-inset-bottom);
 
 }
 
-.app{
+.app {
 width:100%;
 max-width:520px;
 padding:20px;
 }
 
+
 /* HEADER */
 
-.header{
+.header {
 text-align:center;
 margin-bottom:25px;
 }
 
-.header h1{
+.header h1 {
 font-size:24px;
 margin-bottom:6px;
 }
 
-.subtitle{
+.subtitle {
 font-size:13px;
 opacity:.7;
 }
 
+
 /* CARDS */
 
-.cards{
+.cards {
 display:grid;
 grid-template-columns:1fr 1fr;
-gap:12px;
+gap:14px;
 }
 
-.card{
+.card {
 background:#1c1c1c;
 border-radius:14px;
 padding:20px 10px;
@@ -58,24 +61,26 @@ cursor:pointer;
 transition:.25s;
 }
 
-.card:active{
+.card:active {
 transform:scale(.96);
 }
 
-.card p{
+.card p {
 margin-top:10px;
 font-size:13px;
 }
 
+
 /* ICON */
 
-.envelope{
+.envelope {
 width:46px;
 height:32px;
 margin:0 auto;
 background:#fff;
 border-radius:4px;
 }
+
 
 /* SPECIAL */
 
@@ -84,19 +89,17 @@ background:#C48DFF;
 color:white;
 }
 
+
 /* MODAL */
 
-.modal{
+.modal {
 position:fixed;
 inset:0;
 background:rgba(0,0,0,.8);
-
 display:flex;
 justify-content:center;
 align-items:center;
-
 padding:16px;
-
 opacity:0;
 pointer-events:none;
 transition:.3s;
@@ -107,56 +110,51 @@ opacity:1;
 pointer-events:auto;
 }
 
+
 /* LETTER */
 
-.letter{
+.letter {
 background:#fff;
 color:#000;
-
 border-radius:18px;
-
 width:100%;
 max-width:520px;
-
 max-height:90vh;
 overflow-y:auto;
-
 padding:30px 22px 26px 22px;
-
 position:relative;
 }
 
+
 /* CLOSE */
 
-.close{
+.close {
 position:absolute;
 top:12px;
 right:16px;
-
 font-size:26px;
 border:none;
 background:none;
 cursor:pointer;
 }
 
+
 /* CONTENT */
 
-.letter-content h2{
+.letter-content h2 {
 font-size:20px;
 margin-bottom:16px;
 line-height:1.3;
 }
 
-.letter-content p{
+.letter-content p {
 font-size:14px;
 line-height:1.7;
-
 white-space:pre-line;
-
 margin-bottom:20px;
 }
 
-.letter-content img{
+.letter-content img {
 width:100%;
 border-radius:12px;
 margin-top:10px;
