@@ -159,3 +159,34 @@ width:100%;
 border-radius:12px;
 margin-top:10px;
 }
+
+.action-btn{
+margin-top:10px;
+padding:12px 16px;
+border:none;
+border-radius:10px;
+background:#111;
+color:#fff;
+font-family:"Unbounded",sans-serif;
+font-size:13px;
+cursor:pointer;
+width:100%;
+}
+
+.action-result{
+margin-top:14px;
+font-size:14px;
+line-height:1.6;
+opacity:.85;
+text-align:center;
+}
+
+.heart{
+font-size:26px;
+animation:pop .6s ease;
+}
+
+@keyframes pop{
+0%{transform:scale(.5);opacity:0;}
+100%{transform:scale(1);opacity:1;}
+}
