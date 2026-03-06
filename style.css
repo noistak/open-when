@@ -8,117 +8,135 @@ body{
 font-family:"Unbounded",sans-serif;
 background:#111;
 color:white;
-height:100vh;
+min-height:100vh;
 display:flex;
 justify-content:center;
-align-items:center;
+align-items:flex-start;
 }
 
 .app{
 width:100%;
-max-width:900px;
-padding:30px;
+max-width:520px;
+padding:20px;
 }
+
+/* HEADER */
 
 .header{
 text-align:center;
-margin-bottom:40px;
+margin-bottom:25px;
 }
 
 .header h1{
-font-size:32px;
-margin-bottom:10px;
+font-size:24px;
+margin-bottom:6px;
 }
 
 .subtitle{
+font-size:13px;
 opacity:.7;
 }
 
+/* CARDS */
+
 .cards{
 display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:20px;
+grid-template-columns:1fr 1fr;
+gap:12px;
 }
 
 .card{
 background:#1c1c1c;
-border-radius:16px;
-padding:30px;
+border-radius:14px;
+padding:20px 10px;
 text-align:center;
 cursor:pointer;
-transition:.3s;
+transition:.25s;
 }
 
-.card:hover{
-transform:translateY(-5px);
-background:#242424;
+.card:active{
+transform:scale(.96);
 }
 
 .card p{
-margin-top:15px;
-font-size:14px;
+margin-top:10px;
+font-size:13px;
 }
 
+/* ICON */
+
 .envelope{
-width:60px;
-height:40px;
+width:46px;
+height:32px;
 margin:0 auto;
 background:#fff;
-clip-path:polygon(0 0,100% 0,100% 100%,0 100%);
+border-radius:4px;
 }
+
+/* SPECIAL */
 
 .special{
 background:#C48DFF;
 color:white;
 }
 
-.special:hover{
-background:#b97cff;
-}
+/* MODAL */
 
 .modal{
 position:fixed;
 inset:0;
-background:rgba(0,0,0,.7);
+background:rgba(0,0,0,.8);
 display:flex;
 justify-content:center;
-align-items:center;
+align-items:flex-end;
 opacity:0;
 pointer-events:none;
-transition:.4s;
+transition:.3s;
+padding:15px;
 }
 
 .modal.active{
 opacity:1;
-pointer-events:all;
+pointer-events:auto;
 }
+
+/* LETTER */
 
 .letter{
 background:#fff;
 color:#000;
-border-radius:20px;
-padding:40px;
-max-width:500px;
-width:90%;
+border-radius:20px 20px 0 0;
+padding:26px;
+width:100%;
+max-width:520px;
+max-height:85vh;
+overflow-y:auto;
 position:relative;
 }
 
+/* CLOSE */
+
 .close{
 position:absolute;
-top:15px;
-right:20px;
-font-size:24px;
+top:12px;
+right:16px;
+font-size:26px;
 border:none;
 background:none;
 cursor:pointer;
 }
 
+/* CONTENT */
+
 .letter-content h2{
-margin-bottom:20px;
+font-size:20px;
+margin-bottom:18px;
 }
 
 .letter-content p{
-line-height:1.6;
+line-height:1.7;
+font-size:14px;
+white-space:pre-line;
 margin-bottom:20px;
 }
 
