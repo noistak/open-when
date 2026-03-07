@@ -6,9 +6,7 @@ const text = document.getElementById("letterText")
 const img = document.getElementById("letterImg")
 
 const closeBtn = document.querySelector(".close")
-
-const actionBtn = document.getElementById("actionBtn")
-const actionResult = document.getElementById("actionResult")
+const actionResultContainer = document.getElementById("actionResult")
 
 
 const letters = {
@@ -213,180 +211,195 @@ const actions = {
 
 
 
-cards.forEach(card=>{
+let currentLetterId = null; // хранит текущий раздел
 
-card.addEventListener("click",()=>{
-
-const id = card.dataset.id
-const data = letters[id]
-
-title.textContent = data.title
-text.textContent = data.text
-img.src = data.img
-
-actionBtn.textContent = actions[id]
-actionBtn.dataset.id = id
-actionResult.innerHTML = ""
-
-modal.classList.add("active")
-
+cards.forEach(card => {
+  card.addEventListener("click", () => {
+    const id = card.dataset.id
+    currentLetterId = id; // обновляем текущий раздел
+    showLetter(id)
+    modal.classList.add("active")
+  })
 })
 
+function showLetter(id) {
+  const data = letters[id]
+  const letterContent = document.querySelector(".letter-content")
+  
+  letterContent.innerHTML = `
+    <h2 id="letterTitle">${data.title}</h2>
+    <p id="letterText">${data.text}</p>
+    <img id="letterImg" src="${data.img}">
+    <button id="actionBtn" class="action-btn">${actions[id]}</button>
+    <div id="actionResult"></div>
+  `
+
+  setupActionButton(id)
+}
+
+function restoreLetter() {
+  if (!currentLetterId) return;
+  showLetter(currentLetterId) // восстанавливаем именно текущий раздел
+}
+
+function setupActionButton(id) {
+  const actionBtn = document.getElementById("actionBtn")
+  actionBtn.replaceWith(actionBtn.cloneNode(true)) // сброс обработчиков
+  const newActionBtn = document.getElementById("actionBtn")
+  newActionBtn.addEventListener("click", () => handleAction(id))
+}
+
+// кнопки "Вернуться" внутри hug или мысли
+document.addEventListener("click", e => {
+  if (e.target.classList.contains("hug-back") || e.target.classList.contains("thoughts-back")) {
+    restoreLetter()
+  }
 })
 
+// функция обработки действия
+function handleAction(id) {
+  const letterContent = document.querySelector(".letter-content")
+  actionResultContainer.innerHTML = ""
 
+  if (id == 1) { // hug
+    letterContent.innerHTML = `
+      <div class="hug-scene">
+        <img src="img/2.gif" class="hug-gif">
+        <div class="hug-message">Виртуальное объятие доставлено.<br>Иногда даже экран может обнять.</div>
+        <div class="hearts"></div>
+        <button class="hug-back">Вернуться</button>
+      </div>
+    `
+    createHearts()
+    if(navigator.vibrate) navigator.vibrate([30,40,30])
 
-let hugCount = 0
+    // кнопка "Вернуться" для hug
+    document.querySelector(".hug-back").onclick = () => restoreLetter(1)
+  }
 
-actionBtn.onclick = () => {
+  if (id == 2) { // мысли
+    letterContent.innerHTML = `
+      <div class="thoughts-scene">
+        <img src="img/2.gif" class="city-gif">
+        <div class="clouds-container"></div>
+        <button class="thoughts-back">Вернуться</button>
+      </div>
+    `
+    const cloudsContainer = document.querySelector(".clouds-container")
 
-const id = actionBtn.dataset.id
+    const phrases = [
+      "Я представляю, как ты идёшь по улице, и улыбаюсь.",
+      "Скоро снова увижу тебя, и это греет.",
+      "Каждая мысль обо мне с тобой возвращается, будто тепло.",
+      "Я помню твой смех и день сразу светлеет.",
+      "Иногда хочется просто сказать: «Я скучаю».",
+      "Ты там, а я тут, но мысленно мы рядом.",
+      "Когда думаю о тебе — всё вокруг кажется спокойнее."
+    ]
 
-if(id == 1){
+    const totalHeight = 60 // область сверху вниз
+    const startTop = 15
+    const step = totalHeight / phrases.length
 
-const letterContent = document.querySelector(".letter-content")
+    phrases.forEach((phrase, i) => {
+      const cloud = document.createElement("div")
+      cloud.className = "thought-cloud"
+      cloud.textContent = phrase
+      cloud.style.top = startTop + step * i + "%"
+      cloud.style.left = 20 + Math.random() * 60 + "%"
+      cloud.style.animationDelay = (i*0.2) + "s"
 
-letterContent.innerHTML = `
-<div class="hug-scene">
+      cloud.onclick = () => {
+        cloud.style.transform = "scale(1.2)"
+        cloud.style.opacity = 0
+        if(navigator.vibrate) navigator.vibrate(20)
+        setTimeout(() => cloud.remove(), 300)
+      }
 
-<img src="img/2.gif" class="hug-gif">
+      cloudsContainer.appendChild(cloud)
+    })
 
-<div class="hug-message">
-Виртуальное объятие доставлено.
-<br>
-Иногда даже экран может обнять.
-</div>
+    // кнопка "Вернуться" для мыслей
+    document.querySelector(".thoughts-back").onclick = () => restoreLetter(2)
+  }
 
-<div class="hearts"></div>
+  // остальные действия (3–8)
+  if(id == 3){
+    const phrases = [
+      "Ты справляешься лучше, чем думаешь.",
+      "У тебя получается больше, чем кажется.",
+      "Иногда просто нужно немного времени."
+    ]
+    actionResultContainer.textContent = phrases[Math.floor(Math.random()*phrases.length)]
+  }
 
-<button class="hug-back">Вернуться</button>
+  if(id == 4){
+    document.body.style.background = "#000"
+    actionResultContainer.textContent = "Ночь стала немного тише."
+  }
 
-</div>
-`
+  if(id == 5){
+    actionResultContainer.innerHTML = `
+      <p>30 декабря — первая встреча</p>
+      <p>Первая прогулка</p>
+      <p>Первый поцелуй</p>
+    `
+  }
 
-createHearts()
+  if(id == 6){
+    const smiles = [
+      "Ты улыбаешься очень по-настоящему.",
+      "Эта улыбка немного заразительная.",
+      "Улыбка тебе очень идет."
+    ]
+    actionResultContainer.textContent = smiles[Math.floor(Math.random()*smiles.length)]
+  }
 
-if(navigator.vibrate){
-navigator.vibrate([30,40,30])
+  if(id == 7){
+    document.body.style.transform = "translateX(4px)"
+    setTimeout(()=>document.body.style.transform="translateX(-4px)",80)
+    setTimeout(()=>document.body.style.transform="translateX(0)",160)
+    actionResultContainer.textContent = "Стало чуть легче?"
+  }
+
+  if(id == 8){
+    actionResultContainer.textContent = "С 8 марта 🌸"
+  }
 }
 
-document.querySelector(".hug-back").onclick = () => {
+// функция восстановления письма после "Вернуться"
+function restoreLetter(id){
+  const data = letters[id]
+  const letterContent = document.querySelector(".letter-content")
 
-const data = letters[1]
+  letterContent.innerHTML = `
+    <h2 id="letterTitle">${data.title}</h2>
+    <p id="letterText">${data.text}</p>
+    <img id="letterImg" src="${data.img}">
+    <button id="actionBtn" class="action-btn">${actions[id]}</button>
+    <div id="actionResult"></div>
+  `
 
-letterContent.innerHTML = `
-<h2>${data.title}</h2>
-<p>${data.text}</p>
-<img src="${data.img}">
-<button class="action-btn" id="actionBtn">Обнять</button>
-<div id="actionResult"></div>
-`
-
-document.getElementById("actionBtn").onclick = actionBtn.onclick
-
+  setupActionButton(id) // перепривязываем обработчик
 }
 
-}
-
-if(id == 2){
-actionResult.innerHTML = "Я тоже иногда думаю о тебе."
-}
-
-if(id == 3){
-
-const phrases = [
-"Ты справляешься лучше, чем думаешь.",
-"У тебя получается больше, чем кажется.",
-"Иногда просто нужно немного времени."
-]
-
-actionResult.innerHTML = phrases[Math.floor(Math.random()*phrases.length)]
-
-}
-
-if(id == 4){
-
-document.body.style.background = "#000"
-actionResult.innerHTML = "Ночь стала немного тише."
-
-}
-
-if(id == 5){
-
-actionResult.innerHTML = `
-<p>30 декабря — первая встреча</p>
-<p>Первая прогулка</p>
-<p>Первый поцелуй</p>
-`
-
-}
-
-if(id == 6){
-
-const smiles = [
-"Ты улыбаешься очень по-настоящему.",
-"Эта улыбка немного заразительная.",
-"Улыбка тебе очень идет."
-]
-
-actionResult.innerHTML = smiles[Math.floor(Math.random()*smiles.length)]
-
-}
-
-if(id == 7){
-
-document.body.style.transform = "translateX(4px)"
-setTimeout(()=>document.body.style.transform="translateX(-4px)",80)
-setTimeout(()=>document.body.style.transform="translateX(0)",160)
-
-actionResult.innerHTML = "Стало чуть легче?"
-
-}
-
-if(id == 8){
-
-actionResult.innerHTML = "С 8 марта 🌸"
-
-}
-
-}
-
-
-
-
+// функция создания сердец
 function createHearts(){
+  const container = document.querySelector(".hearts")
+  container.innerHTML = ""
 
-const container = document.querySelector(".hearts")
+  for(let i=0;i<6;i++){
+    const heart = document.createElement("div")
+    heart.className = "heart"
+    heart.innerHTML = "❤️"
+    heart.style.left = (Math.random()*120-60)+"px"
+    heart.style.animationDelay = (Math.random()*0.5)+"s"
+    container.appendChild(heart)
+  }
 
-for(let i=0;i<6;i++){
-
-const heart = document.createElement("div")
-heart.className = "heart"
-heart.innerHTML = "❤️"
-
-heart.style.left = (Math.random()*120-60)+"px"
-heart.style.animationDelay = (Math.random()*0.5)+"s"
-
-container.appendChild(heart)
-
+  setTimeout(()=>container.innerHTML = "",2000)
 }
 
-setTimeout(()=>{
-container.innerHTML = ""
-},2000)
-
-}
-
-
-
-
-
-closeBtn.onclick = () => {
-modal.classList.remove("active")
-}
-
-modal.onclick = (e) => {
-if(e.target === modal){
-modal.classList.remove("active")
-}
-}
+// закрытие модалки
+closeBtn.onclick = () => modal.classList.remove("active")
+modal.onclick = (e) => { if(e.target === modal) modal.classList.remove("active") }
