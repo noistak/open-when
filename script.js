@@ -289,7 +289,7 @@ if (id == 1) { // hug
 if (id == 2) { // мысли
   letterContent.innerHTML = `
     <div class="thoughts-scene">
-      <img src="img/2.gif" class="city-gif">
+      <img src="img/22.gif" class="city-gif">
       <div class="clouds-container"></div>
       <div class="thoughts-hint">Нажми на облака, чтобы "лопнуть"</div>
       <button class="back-btn">Вернуться</button>
@@ -447,3 +447,4 @@ modal.onclick = (e) => {
     document.querySelector(".letter-content").innerHTML = ""
   }
 }
+
