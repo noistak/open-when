@@ -261,7 +261,7 @@ function handleAction(id) {
   const letterContent = document.querySelector(".letter-content")
   actionResultContainer.innerHTML = ""
 
-  if (id == 1) { // hug
+if (id == 1) { // hug
     letterContent.innerHTML = `
       <div class="hug-scene">
         <img src="img/2.gif" class="hug-gif">
@@ -275,63 +275,106 @@ function handleAction(id) {
 
     // кнопка "Вернуться" для hug
     document.querySelector(".hug-back").onclick = () => restoreLetter(1)
+}
+
+if (id == 2) { // мысли
+  letterContent.innerHTML = `
+    <div class="thoughts-scene">
+      <img src="img/2.gif" class="city-gif">
+      <div class="clouds-container"></div>
+      <div class="thoughts-hint">Нажми на облака, чтобы "лопнуть"</div>
+      <button class="thoughts-back">Вернуться</button>
+    </div>
+  `
+
+  const cloudsContainer = document.querySelector(".clouds-container")
+  const hint = document.querySelector(".thoughts-hint")
+  const phrases = [
+    "Я представляю, как ты идёшь по улице, и улыбаюсь",
+    "Скоро снова увижу тебя, и это греет",
+    "Я помню твой смех и день сразу светлеет",
+    "Иногда хочется просто сказать: «Я скучаю»",
+    "Ты там, а я тут, но мысленно мы рядом"
+  ]
+
+  const fixedPositions = [
+  {top: 20, left: 20},
+  {top: 40, left: 50},
+  {top: 60, left: 30},
+  {top: 50, left: 5},
+  {top: 35, left: 1}
+]
+
+
+phrases.forEach((phrase, i) => {
+  const cloud = document.createElement("div")
+  cloud.className = "thought-cloud"
+  cloud.textContent = phrase
+
+  const pos = fixedPositions[i]
+  cloud.style.top = pos.top + "%"
+  cloud.style.left = pos.left + "%"
+
+  cloud.style.animationDelay = (i*0.2) + "s"
+  cloud.onclick = () => {
+    cloud.style.transform = "scale(1.2) translate(-50%, -50%)"
+    cloud.style.opacity = 0
+    if(navigator.vibrate) navigator.vibrate(20)
+    setTimeout(()=>cloud.remove(),300)
   }
 
-  if (id == 2) { // мысли
-    letterContent.innerHTML = `
-      <div class="thoughts-scene">
-        <img src="img/2.gif" class="city-gif">
-        <div class="clouds-container"></div>
-        <button class="thoughts-back">Вернуться</button>
-      </div>
-    `
-    const cloudsContainer = document.querySelector(".clouds-container")
+  cloudsContainer.appendChild(cloud)
+})
 
-    const phrases = [
-      "Я представляю, как ты идёшь по улице, и улыбаюсь.",
-      "Скоро снова увижу тебя, и это греет.",
-      "Каждая мысль обо мне с тобой возвращается, будто тепло.",
-      "Я помню твой смех и день сразу светлеет.",
-      "Иногда хочется просто сказать: «Я скучаю».",
-      "Ты там, а я тут, но мысленно мы рядом.",
-      "Когда думаю о тебе — всё вокруг кажется спокойнее."
-    ]
+  // кнопка "Вернуться"
+  document.querySelector(".thoughts-back").onclick = () => restoreLetter(2)
+}
 
-    const totalHeight = 60 // область сверху вниз
-    const startTop = 15
-    const step = totalHeight / phrases.length
 
-    phrases.forEach((phrase, i) => {
-      const cloud = document.createElement("div")
-      cloud.className = "thought-cloud"
-      cloud.textContent = phrase
-      cloud.style.top = startTop + step * i + "%"
-      cloud.style.left = 20 + Math.random() * 60 + "%"
-      cloud.style.animationDelay = (i*0.2) + "s"
+if(id == 3){ // сомневаешься в себе
+  const phrases = [
+    "Ты справляешься лучше, чем думаешь.",
+    "У тебя получается больше, чем кажется.",
+    "Иногда просто нужно немного времени."
+  ]
 
-      cloud.onclick = () => {
-        cloud.style.transform = "scale(1.2)"
-        cloud.style.opacity = 0
-        if(navigator.vibrate) navigator.vibrate(20)
-        setTimeout(() => cloud.remove(), 300)
-      }
+  // создаем контейнер для всплывающих облаков
+  actionResultContainer.innerHTML = `<div class="confidence-container"></div>`;
+  const container = document.querySelector(".confidence-container");
 
-      cloudsContainer.appendChild(cloud)
-    })
+  const phrase = phrases[Math.floor(Math.random()*phrases.length)];
+  const cloud = document.createElement("div");
+  cloud.className = "confidence-cloud";
+  cloud.textContent = phrase;
 
-    // кнопка "Вернуться" для мыслей
-    document.querySelector(".thoughts-back").onclick = () => restoreLetter(2)
-  }
+  container.appendChild(cloud);
 
-  // остальные действия (3–8)
-  if(id == 3){
-    const phrases = [
-      "Ты справляешься лучше, чем думаешь.",
-      "У тебя получается больше, чем кажется.",
-      "Иногда просто нужно немного времени."
-    ]
-    actionResultContainer.textContent = phrases[Math.floor(Math.random()*phrases.length)]
-  }
+  // стартовая позиция по центру
+  cloud.style.top = "50%";
+  cloud.style.left = "50%";
+  cloud.style.transform = "translate(-50%, -50%) scale(0.6) rotate(-5deg)";
+  cloud.style.opacity = 0;
+
+  // анимация появления
+  setTimeout(() => {
+    cloud.style.transition = "all 0.7s ease-out";
+    cloud.style.transform = "translate(-50%, -120%) scale(1) rotate(0deg)";
+    cloud.style.opacity = 1;
+  }, 50);
+
+  // через секунду исчезает
+  setTimeout(() => {
+    cloud.style.transition = "all 0.5s ease-in";
+    cloud.style.transform += " scale(0.8)";
+    cloud.style.opacity = 0;
+    setTimeout(()=> cloud.remove(), 500);
+  }, 2000);
+}
+
+
+
+
+
 
   if(id == 4){
     document.body.style.background = "#000"
@@ -363,8 +406,38 @@ function handleAction(id) {
   }
 
   if(id == 8){
-    actionResultContainer.textContent = "С 8 марта 🌸"
+  actionResultContainer.innerHTML = "" // очищаем
+  const letterContent = document.querySelector(".letter-content")
+
+  // создаём контейнер для падающих элементов
+  let container = document.createElement("div")
+  container.className = "spring-particles-container"
+  letterContent.appendChild(container)
+
+  // создаём 12 частиц
+  for(let i=0; i<12; i++){
+    const particle = document.createElement("div")
+    particle.className = "spring-particle"
+    particle.textContent = "🌸" // можно заменить на ❤️ или 🌷
+    
+    // случайное начальное положение по горизонтали
+    particle.style.left = (10 + Math.random()*80) + "%"
+    
+    // случайная задержка анимации
+    particle.style.animationDelay = (i*0.1) + "s"
+
+    container.appendChild(particle)
+
+    // удаляем после окончания анимации
+    particle.addEventListener("animationend", ()=>particle.remove())
   }
+
+  // текст поздравления над кнопкой
+  const hint = document.createElement("div")
+  hint.className = "thoughts-hint"
+  hint.textContent = "Нажми на кнопку, чтобы увидеть сюрприз!"
+  letterContent.insertBefore(hint, document.querySelector(".action-btn"))
+}
 }
 
 // функция восстановления письма после "Вернуться"
