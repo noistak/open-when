@@ -244,42 +244,45 @@ const id = actionBtn.dataset.id
 
 if(id == 1){
 
+const letterContent = document.querySelector(".letter-content")
+
+letterContent.innerHTML = `
+<div class="hug-scene">
+
+<img src="img/2.gif" class="hug-gif">
+
+<div class="hug-message">
+Виртуальное объятие доставлено.
+<br>
+Иногда даже экран может обнять.
+</div>
+
+<div class="hearts"></div>
+
+<button class="hug-back">Вернуться</button>
+
+</div>
+`
+
+createHearts()
+
 if(navigator.vibrate){
-navigator.vibrate(40)
+navigator.vibrate([30,40,30])
 }
 
-hugCount++
+document.querySelector(".hug-back").onclick = () => {
 
-if(hugCount == 1){
+const data = letters[1]
 
-actionResult.innerHTML = `
-<div class="hug">
-❤️
-</div>
-<p>Виртуальное объятие доставлено.</p>
+letterContent.innerHTML = `
+<h2>${data.title}</h2>
+<p>${data.text}</p>
+<img src="${data.img}">
+<button class="action-btn" id="actionBtn">Обнять</button>
+<div id="actionResult"></div>
 `
 
-}
-
-else if(hugCount == 2){
-
-actionResult.innerHTML = `
-<div class="hug">
-❤️❤️
-</div>
-<p>Иногда одно объятие — уже много.</p>
-`
-
-}
-
-else{
-
-actionResult.innerHTML = `
-<div class="hug">
-❤️🤍❤️
-</div>
-<p>Хорошо. Тогда ещё одно.</p>
-`
+document.getElementById("actionBtn").onclick = actionBtn.onclick
 
 }
 
@@ -347,6 +350,34 @@ actionResult.innerHTML = "С 8 марта 🌸"
 }
 
 }
+
+
+
+
+function createHearts(){
+
+const container = document.querySelector(".hearts")
+
+for(let i=0;i<6;i++){
+
+const heart = document.createElement("div")
+heart.className = "heart"
+heart.innerHTML = "❤️"
+
+heart.style.left = (Math.random()*120-60)+"px"
+heart.style.animationDelay = (Math.random()*0.5)+"s"
+
+container.appendChild(heart)
+
+}
+
+setTimeout(()=>{
+container.innerHTML = ""
+},2000)
+
+}
+
+
 
 
 
