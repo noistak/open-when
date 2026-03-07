@@ -61,8 +61,6 @@ body {
 }
 
 
-/* CARDS */
-
 /* GRID КАРТОЧЕК */
 .cards {
   display: grid;
@@ -106,7 +104,6 @@ body {
 
 
 /* SPECIAL */
-
 .special {
 background:#C48DFF;
 color:white;
@@ -152,8 +149,7 @@ color:white;
 }
 
 
-/* CLOSE */
-
+/* кнопка-закрыть */
 .close {
 position:absolute;
 top:12px;
@@ -314,16 +310,17 @@ transform:scale(1);
 }
 
 
-/* 2 */
+/* 2 письмо */
 .thoughts-scene{
-  position:relative;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:20px;
-  animation:fadeInScene .5s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  padding-bottom: 30px; /* больше пространства для кнопки */
+  animation: fadeInScene .5s ease;
+  min-height: 300px; /* фиксированная зона для облаков */
 }
 
 .city-gif{
@@ -333,24 +330,35 @@ transform:scale(1);
 }
 
 .clouds-container{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
+  position: absolute;
+  top: 0;
+  bottom: 50px; /* оставляем место для кнопки */
+  left: 0;
+  right: 0;
+  pointer-events: none;
 }
 
 .thought-cloud{
-  position:absolute;
-  background:rgba(255,255,255,0.95);
-  color:#111;
-  padding:10px 14px;
-  border-radius:16px;
-  font-size:13px;
-  cursor:pointer;
-  pointer-events:auto;
-  opacity:0;
-  transform:scale(0.7);
-  animation:cloudPop 0.5s forwards;
-  box-shadow:0 2px 6px rgba(0,0,0,0.2);
+  position: absolute;
+  background: rgba(255,255,255,0.95);
+  color: #111;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  cursor: pointer;
+  pointer-events: auto;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.7); /* центрируем по X и Y */
+  animation: cloudPop 0.5s forwards;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.thoughts-hint{
+  font-size: 11px;
+  opacity: 0.6;
+  margin-bottom: 6px;
+  text-align: center;
+  z-index: 5;
 }
 
 @keyframes cloudPop{
@@ -364,7 +372,7 @@ transform:scale(1);
 }
 
 .thoughts-back{
-  margin-top:18px;
+  margin-top: 6px; /* меньше, так как есть подсказка */
   background:#111;
   color:white;
   border:none;
@@ -372,6 +380,50 @@ transform:scale(1);
   padding:12px 20px;
   font-family:"Unbounded",sans-serif;
   cursor:pointer;
+  z-index: 10;
+  position: relative;
+}
+
+/* 8 */
+.spring-particles-container{
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:60px; /* оставляем место для кнопки */
+  pointer-events:none;
+  overflow:hidden;
+}
+
+.spring-particle{
+  position:absolute;
+  font-size:24px;
+  opacity:0;
+  transform:translateY(0) scale(0.5);
+  animation:fallParticle 1.2s forwards;
+}
+
+@keyframes fallParticle{
+  0%{
+    opacity:0;
+    transform:translateY(0) scale(0.5) rotate(0deg);
+  }
+  20%{
+    opacity:1;
+    transform:translateY(10px) scale(1) rotate(15deg);
+  }
+  100%{
+    opacity:0;
+    transform:translateY(120px) scale(0.8) rotate(360deg);
+  }
+}
+
+/* подсказка над кнопкой */
+.thoughts-hint{
+  font-size: 12px;
+  opacity: 0.7;
+  margin-bottom: 6px;
+  text-align:center;
 }
 
 
