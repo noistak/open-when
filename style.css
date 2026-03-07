@@ -5,18 +5,32 @@ box-sizing:border-box;
 }
 
 body {
-font-family:"Unbounded",sans-serif;
-background:#111;
-color:white;
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-overflow:hidden;
+  font-family:"Unbounded",sans-serif;
+  background:#111;
+  color:white;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start; /* центрируем по вертикали только для больших экранов */
+  overflow-x:hidden; /* скролл по горизонтали запрещен */
+  padding-top:env(safe-area-inset-top);
+  padding-bottom:env(safe-area-inset-bottom);
+}
 
-padding-top:env(safe-area-inset-top);
-padding-bottom:env(safe-area-inset-bottom);
-
+.letter {
+  background: #fff;
+  color: #000;
+  border-radius: 18px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto; /* скролл внутри письма */
+  padding: 30px 22px 26px 22px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
 }
 
 .app {
@@ -52,7 +66,7 @@ padding-bottom:env(safe-area-inset-bottom);
 /* GRID КАРТОЧЕК */
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); /* 2 колонки на широких, 1 на узких */
   gap: 14px;
   width: 100%;
 }
@@ -111,6 +125,7 @@ color:white;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s;
+  overflow-y: auto;
 }
 
 .modal.active {
@@ -371,12 +386,8 @@ transform:scale(1);
   }
 
   .cards {
+    grid-template-columns: 1fr;
     gap: 10px;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-  }
-
-  .card {
-    padding: 16px 12px;
   }
 
   .hug-gif {
