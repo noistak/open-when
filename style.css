@@ -1,20 +1,20 @@
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
+margin: 0;
+padding: 0;
+box-sizing: border-box;
 }
 
 body {
-  font-family:"Unbounded",sans-serif;
+  font-family: "Unbounded",sans-serif;
   background:#111;
   color:white;
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:flex-start; /* центрируем по вертикали только для больших экранов */
-  overflow-x:hidden; /* скролл по горизонтали запрещен */
-  padding-top:env(safe-area-inset-top);
-  padding-bottom:env(safe-area-inset-bottom);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-x: hidden;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 .app {
@@ -76,19 +76,18 @@ body {
 }
 
 
-/* SPECIAL */
+/* Карточка 8 марта */
 .special {
 background:#EFEFEF;
 color:white;
 }
 
 .text-march8 {
-
   color: #FF0646;
 }
 
 
-/* модалка */
+/* Модалка */
 .modal {
   position: fixed;
   inset: 0;
@@ -96,7 +95,7 @@ color:white;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 24px 16px; /* увеличенный верх/низ */
+  padding: 24px 16px;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s;
@@ -109,7 +108,7 @@ color:white;
 }
 
 
-/* письмо */
+/* Письмо */
 .letter {
   background: #fff;
   color: #000;
@@ -127,7 +126,7 @@ color:white;
 }
 
 
-/* кнопка-закрыть */
+/* Кнопка-закрыть */
 .close {
 position:absolute;
 top:12px;
