@@ -77,7 +77,7 @@ text:`Ночью всё становится тише.
 или момент,
 когда рядом просто было хорошо.
 
-Если этой ночью не получается уснуть —
+Если этой ночью не получается уснуть –
 просто знай:
 
 где-то есть человек,
@@ -213,11 +213,11 @@ img:"img/8.png"
 const actions = {
 1:"Обнять",
 2:"Отправить мысль",
-3:"Тихая ночь",
-4:"Посмотреть воспоминания",
-5:"Случайная улыбка",
-6:"Выпустить пар",
-7:"Спасибо",
+3:"Сделать ночь тише",
+4:"Открыть момент",
+5:"Улыбнись",
+6:"Выдохнуть",
+7:"Напомнить",
 8:"Получить"
 }
 
@@ -274,7 +274,8 @@ if (id == 1) { // hug
     letterContent.innerHTML = `
       <div class="hug-scene">
         <img src="img/11.gif" class="hug-gif">
-        <div class="hug-message">Виртуальное объятие доставлено.<br>Иногда даже экран может обнять.</div>
+        <div class="hug-message">Виртуальное объятие доставлено.<br>
+          Тепло и поддержка могут быть ближе, чем кажется.<br></div>
         <div class="hearts"></div>
         <button class="back-btn">Вернуться</button>
       </div>
@@ -301,9 +302,9 @@ if (id == 2) { // мысли
   const phrases = [
     "Я представляю, как ты идёшь по улице, и улыбаюсь",
     "Скоро снова увижу тебя, и это греет",
-    "Я помню твой смех и день сразу светлеет",
-    "Иногда хочется просто сказать: «Я скучаю»",
-    "Ты там, а я тут, но мысленно мы рядом"
+    "Я помню твой смех и день становится светлее",
+    "Иногда просто хочется сказать: «Я скучаю»",
+    "Ты там, а я мысленно рядом, и это важно"
   ]
 
   const fixedPositions = [
@@ -338,26 +339,120 @@ phrases.forEach((phrase, i) => {
   document.querySelector(".back-btn").onclick = () => restoreLetter(2)
 }
 
+if(id == 3){
+  const letterEl = document.querySelector(".letter");
+  letterEl.classList.add("night"); // ставим темный фон
 
-if(id == 3){ 
+  const letterContent = document.querySelector(".letter-content");
+  letterContent.innerHTML = `
+    <div class="night-scene">
+      <img src="img/3.gif" class="night-gif">
+        <div class="night-text">
+          Ночь становится тише, и мысли словно останавливаются.<br>
+          Дай себе немного тишины, почувствуй, как день уходит,<br>
+          а вокруг наступает покой. <br> 
+          Доброй ночи ✨
+        </div>
+      <button class="back-btn night-back">Вернуться</button>
+    </div>
+  `;
 
+  // при возврате — удаляем класс
+  document.querySelector(".night-back").onclick = () => {
+    restoreLetter(3);
+    letterEl.classList.remove("night");
+  }
 }
 
 
 if(id == 4){
-    
+
+  letterContent.innerHTML = `
+    <div class="scene-four">
+
+      <img src="img/44.gif" class="scene-four-gif">
+
+      <div class="scene-four-text">
+        Вспомни этот момент вместе с музыкой.<br>
+        Этот плейлист играет именно для тебя,<br>
+        и каждая песня напоминает мне о тебе.<br>
+        Держи его в сердце, пусть согревает.
+      </div>
+
+      <button class="back-btn">Вернуться</button>
+
+    </div>
+  `
+
+  document.querySelector(".back-btn").onclick = () => restoreLetter(4)
+
 }
 
 if(id == 5){
-   
+
+  letterContent.innerHTML = `
+    <div class="scene-five">
+
+      <img src="img/55.gif" class="scene-five-gif">
+
+      <div class="scene-five-text">
+        Я увидел тебя — и улыбка появилась сама собой.<br>
+        Лёгкое изумление, тепло внутри,<br>
+        и мгновение стало чуть ярче.<br>
+        Пусть твоя улыбка продолжает согревать день.
+      </div>
+
+      <button class="back-btn">Вернуться</button>
+
+    </div>
+  `
+
+  document.querySelector(".back-btn").onclick = () => restoreLetter(5)
+
 }
 
 if(id == 6){
-    
+
+  letterContent.innerHTML = `
+    <div class="scene-six">
+
+      <img src="img/66.gif" class="scene-six-gif">
+
+      <div class="scene-six-text">
+        Сделай глубокий вдох и выдохни.<br>
+          Пусть тяжесть уходит, мысли замедляются,<br>
+          и мир вокруг кажется немного проще.
+      </div>
+
+      <button class="back-btn">Вернуться</button>
+
+    </div>
+  `
+
+  document.querySelector(".back-btn").onclick = () => restoreLetter(6)
+
 }
 
 if(id == 7){
-    
+
+  letterContent.innerHTML = `
+    <div class="scene-seven">
+
+      <img src="img/7.gif" class="scene-seven-gif">
+
+      <div class="scene-seven-text">
+        Пусть это напоминание согреет: есть человек,<br>
+        для которого ты важна, рядом с которым становится лучше.<br>
+        Иногда достаточно просто вспомнить об этом.
+      </div>
+
+      <button class="back-btn">Вернуться</button>
+
+    </div>
+  `
+
+  document.querySelector(".back-btn").onclick = () => restoreLetter(7)
+
 }
 
 
@@ -435,7 +530,8 @@ function createHearts(){
 closeBtn.onclick = () => {
   modal.classList.remove("active")
   document.body.style.overflow = ""
-
+  const letterEl = document.querySelector(".letter");
+  letterEl.classList.remove("night"); // удаляем тёмный фон
   document.querySelector(".letter-content").innerHTML = ""
 }
 
@@ -443,8 +539,8 @@ modal.onclick = (e) => {
   if(e.target === modal){
     modal.classList.remove("active")
     document.body.style.overflow = ""
-
+    const letterEl = document.querySelector(".letter");
+    letterEl.classList.remove("night"); // удаляем тёмный фон
     document.querySelector(".letter-content").innerHTML = ""
   }
 }
-
