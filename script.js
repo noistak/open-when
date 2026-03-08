@@ -436,7 +436,7 @@ if(id == 7){
   letterContent.innerHTML = `
     <div class="scene-seven">
 
-      <img src="img/7.gif" class="scene-seven-gif">
+      <img src="img/77.gif" class="scene-seven-gif">
 
       <div class="scene-seven-text">
         Пусть это напоминание согреет: есть человек,<br>
@@ -542,3 +542,4 @@ modal.onclick = (e) => {
     document.querySelector(".letter-content").innerHTML = ""
   }
 }
+
