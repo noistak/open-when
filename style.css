@@ -125,6 +125,13 @@ color:white;
   box-sizing: border-box;
 }
 
+/* Тёмный фон только для 3 письма */
+.letter.night {
+  background: linear-gradient(#0f172a,#020617);
+  color: #e5e7eb;
+  border-radius: 16px;
+}
+
 
 /* Кнопка-закрыть */
 .close {
@@ -189,25 +196,25 @@ cursor:pointer;
 }
 
 
-.hug-box{
+.hug-box {
 text-align:center;
 animation:hugFade .4s ease;
 }
 
-.hug-box img{
+.hug-box img {
 width:140px;
 margin:10px auto;
 display:block;
 border-radius:12px;
 }
 
-.hug-text{
+.hug-text {
 margin-top:8px;
 font-size:14px;
 line-height:1.6;
 }
 
-.hearts{
+.hearts {
 position:absolute;
 left:50%;
 top:40%;
@@ -215,14 +222,14 @@ transform:translateX(-50%);
 pointer-events:none;
 }
 
-.heart{
+.heart {
 position:absolute;
 font-size:22px;
 animation:floatUp 2s ease forwards;
 opacity:0;
 }
 
-@keyframes floatUp{
+@keyframes floatUp {
 
 0%{
 transform:translateY(0) scale(.6);
@@ -240,7 +247,7 @@ opacity:0;
 
 }
 
-@keyframes hugFade{
+@keyframes hugFade {
 
 0%{opacity:0; transform:scale(.95)}
 100%{opacity:1; transform:scale(1)}
@@ -248,7 +255,7 @@ opacity:0;
 }
 
 
-.hug-scene{
+.hug-scene {
 display:flex;
 flex-direction:column;
 justify-content:center;
@@ -258,19 +265,19 @@ padding:30px 10px;
 animation:hugScene .5s ease;
 }
 
-.hug-gif{
+.hug-gif {
 width:200px;
 border-radius:16px;
 margin-bottom:18px;
 }
 
-.hug-message{
+.hug-message {
 font-size:15px;
 line-height:1.7;
 margin-bottom:20px;
 }
 
-.back-btn{
+.back-btn {
 margin-top:20px;
 padding:10px 18px;
 border:none;
@@ -281,7 +288,7 @@ font-size:16px;
 cursor:pointer;
 }
 
-@keyframes hugScene{
+@keyframes hugScene {
 0%{
 opacity:0;
 transform:scale(.95);
@@ -294,7 +301,7 @@ transform:scale(1);
 
 
 /* 2 письмо */
-.thoughts-scene{
+.thoughts-scene {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -306,13 +313,13 @@ transform:scale(1);
   min-height: 300px; /* фиксированная зона для облаков */
 }
 
-.city-gif{
+.city-gif {
   width:180px;
   border-radius:14px;
   margin-bottom:16px;
 }
 
-.clouds-container{
+.clouds-container {
   position: absolute;
   top: 0;
   bottom: 50px; /* оставляем место для кнопки */
@@ -321,7 +328,7 @@ transform:scale(1);
   pointer-events: none;
 }
 
-.thought-cloud{
+.thought-cloud {
   position: absolute;
   background: rgba(255,255,255,0.95);
   color: #111;
@@ -336,7 +343,7 @@ transform:scale(1);
   box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
-.thoughts-hint{
+.thoughts-hint {
   font-size: 11px;
   opacity: 0.6;
   margin-bottom: 6px;
@@ -354,7 +361,7 @@ transform:scale(1);
   100%{opacity:1; transform:scale(1);}
 }
 
-.thoughts-back{
+.thoughts-back {
   margin-top: 6px; /* меньше, так как есть подсказка */
   background:#111;
   color:white;
@@ -367,8 +374,142 @@ transform:scale(1);
   position: relative;
 }
 
-/* 8 */
-.march-scene{
+
+/* 3 письмо */
+.night-scene{
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align:center;
+padding:35px 15px;
+background:linear-gradient(#0f172a,#020617);
+border-radius:16px;
+color:#e5e7eb;
+animation:fadeInScene .5s ease;
+}
+
+.night-gif{
+width:200px;
+border-radius:14px;
+margin-bottom:18px;
+box-shadow:0 0 25px rgba(100,150,255,0.25);
+}
+
+.night-text{
+font-size:15px;
+line-height:1.7;
+margin-bottom:20px;
+max-width:260px;
+color:#cbd5f5;
+}
+
+.night-back{
+background:#1e293b;
+color:#fff;
+border:none;
+padding:8px 16px;
+border-radius:8px;
+}
+
+
+/* 4 письмо */
+.scene-four {
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align:center;
+padding:30px 10px;
+animation:fadeInScene .5s ease;
+}
+
+.scene-four-gif {
+width:200px;
+border-radius:14px;
+margin-bottom:18px;
+}
+
+.scene-four-text {
+font-size:15px;
+line-height:1.7;
+margin-bottom:20px;
+max-width:260px;
+}
+
+
+/* 5 письмо */
+.scene-five {
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align:center;
+padding:30px 10px;
+animation:fadeInScene .5s ease;
+}
+
+.scene-five-gif {
+width:200px;
+border-radius:14px;
+margin-bottom:18px;
+}
+
+.scene-five-text {
+font-size:15px;
+line-height:1.7;
+margin-bottom:20px;
+max-width:260px;
+}
+
+
+/* 6 письмо */
+.scene-six{ 
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align:center;
+padding:30px 10px;
+animation:fadeInScene .5s ease;
+}
+
+.scene-six-gif {
+width:200px;
+border-radius:14px;
+margin-bottom:18px;
+}
+
+.scene-six-text {
+font-size:15px;
+line-height:1.7;
+margin-bottom:20px;
+max-width:260px;
+}
+
+
+/* 7 письмо */
+.scene-seven {
+display:flex;
+flex-direction:column;
+align-items:center;
+text-align:center;
+padding:30px 10px;
+animation:fadeInScene .5s ease;
+}
+
+.scene-seven-gif {
+width:200px;
+border-radius:14px;
+margin-bottom:18px;
+}
+
+.scene-seven-text {
+font-size:15px;
+line-height:1.7;
+margin-bottom:20px;
+max-width:260px;
+}
+
+
+/* 8 письмо */
+.march-scene {
 position:relative;
 height:300px;
 overflow:hidden;
@@ -378,25 +519,25 @@ align-items:center;
 justify-content:center;
 }
 
-.march-message{
+.march-message {
 font-size:28px;
 margin-bottom:20px;
 animation: fadeIn 1s ease;
 }
 
-.rain-flower{
+.rain-flower {
 position:absolute;
 top:-40px;
 animation: flowerFall 3s linear forwards;
 }
 
-@keyframes flowerFall{
+@keyframes flowerFall {
 0%{transform:translateY(-50px) rotate(0deg); opacity:0;}
 10%{opacity:1;}
 100%{transform:translateY(350px) rotate(180deg); opacity:0;}
 }
 
-@keyframes fadeIn{
+@keyframes fadeIn {
 from{opacity:0; transform:scale(.9);}
 to{opacity:1; transform:scale(1);}
 }
