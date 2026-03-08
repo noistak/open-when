@@ -344,7 +344,7 @@ if(id == 3){
   const letterContent = document.querySelector(".letter-content");
   letterContent.innerHTML = `
     <div class="night-scene">
-      <img src="img/3.gif" class="night-gif">
+      <img src="img/33.gif" class="night-gif">
         <div class="night-text">
           Ночь становится тише, и мысли словно останавливаются.<br>
           Дай себе немного тишины, почувствуй, как день уходит,<br>
@@ -542,4 +542,5 @@ modal.onclick = (e) => {
     document.querySelector(".letter-content").innerHTML = ""
   }
 }
+
 
